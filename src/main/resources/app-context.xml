@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <bean id="AddressBook" class="AddressBook.Model.AddressBook">
+    </bean>
+    <bean id="ABView" class="View.ABView">
+        <constructor-arg>
+            <ref bean="ABController"></ref>
+        </constructor-arg>
+    </bean>
+    <bean id="ABController" class="Controller.ABController">
+        <constructor-arg>
+            <ref bean="AddressBook"/>
+        </constructor-arg>
+    </bean>
+
+</beans>
