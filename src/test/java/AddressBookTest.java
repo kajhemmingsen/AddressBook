@@ -44,6 +44,8 @@ public class AddressBookTest {
     @Test
     public void toStringTest() {
         testAB.addBuddy(testBuddy);
-        assert(testAB.toString().equals("boi 18350798\n"));
+        testAB.addBuddy(testBuddy2);
+        System.out.println(testAB.toString());
+        assert(testAB.toString().equals("boi 18350798\nboi2 231231\n"));
     }
 }

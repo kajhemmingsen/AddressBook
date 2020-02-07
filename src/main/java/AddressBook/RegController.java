@@ -7,10 +7,7 @@ import AddressBook.Model.BuddyInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RegController {
@@ -21,10 +18,15 @@ public class RegController {
     @Autowired
     private BuddyInfoRepo buddyInfoRepo;
 
+    @RequestMapping("/")
+    public String weloome() {
+        return "init";
+    }
     @GetMapping("/init")
-    public String welcomePage() {
+    public String welcomePage(Model model) {
         AddressBook ab = new AddressBook();
         addressBookRepo.save(ab);
+        model.addAttribute("ActiveBook", ab);
         return "init";
     }
 
@@ -36,20 +38,11 @@ public class RegController {
 
     @PostMapping("/addBuddy")
     public String addbuddy(@ModelAttribute BuddyInfo buddyInfo, Model model) {
+        buddyInfoRepo.save(buddyInfo);
         AddressBook refBook = addressBookRepo.findById(id);
-        BuddyInfo newBuddy = buddyInfo;
-        buddyInfoRepo.save(newBuddy);
         refBook.addBuddy(buddyInfo);
         model.addAttribute("ActiveBook", refBook);
         addressBookRepo.save(refBook);
         return "result";
     }
-
-    @GetMapping("/result")
-    public String displayAddressBook(@RequestParam(value = "id") long id, Model model) {
-        AddressBook refBook = addressBookRepo.findById(id);
-        model.addAttribute("addressBook", refBook);
-        return "result";
-    }
-
 }
