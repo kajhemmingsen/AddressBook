@@ -1,6 +1,6 @@
 language: java
 deploy:
   provider: heroku
-  api-key:
+  api-key: a9f07d0e-811d-4991-a0ed-e4ffcd7f0f5c
   secure: $HEROKU_API_KEY
   app: khbaddressbook
