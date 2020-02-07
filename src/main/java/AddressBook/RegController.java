@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/")
 public class RegController {
 
     long id =  1L;
@@ -18,10 +19,6 @@ public class RegController {
     @Autowired
     private BuddyInfoRepo buddyInfoRepo;
 
-    @RequestMapping("/")
-    public String weloome() {
-        return "init";
-    }
     @GetMapping("/init")
     public String welcomePage(Model model) {
         AddressBook ab = new AddressBook();
