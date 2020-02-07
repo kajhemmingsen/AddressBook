@@ -19,7 +19,7 @@ public class RegController {
     @Autowired
     private BuddyInfoRepo buddyInfoRepo;
 
-    @GetMapping("/")
+    @GetMapping("/init")
     public String welcomePage(Model model) {
         AddressBook ab = new AddressBook();
         addressBookRepo.save(ab);
