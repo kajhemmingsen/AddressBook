@@ -18,6 +18,10 @@ public class AddressBook {
         this.buddies = new ArrayList<BuddyInfo>();
     }
 
+    public AddressBook(long id) {
+        this.ID = id;
+        this.buddies = new ArrayList<BuddyInfo>();
+    }
     public AddressBook(ArrayList<BuddyInfo> existingContacts) {
         this.buddies = existingContacts;
     }
