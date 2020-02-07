@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Welcome</title>
 </head>
 <body>
 <h1>Addressbook Instantiated</h1>
-<a href="/addBuddy">Add some buddies</a>
+<form action="#" th:action="@{/init}" th:object="${addressBook}" method="post">
+    <p>ID: <input type="text" th:field="*{ID}" /></p>
+    <a href="/addBuddy">Add some buddies</a>
+</form>
 </body>
 </html>

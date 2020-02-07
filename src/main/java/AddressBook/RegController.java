@@ -20,11 +20,15 @@ public class RegController {
     private BuddyInfoRepo buddyInfoRepo;
 
     @GetMapping("/init")
-    public String welcomePage(Model model) {
-        AddressBook ab = new AddressBook();
-        addressBookRepo.save(ab);
-        model.addAttribute("ActiveBook", ab);
+    public String landpage(Model model) {
+        model.addAttribute("addressBook", new AddressBook());
         return "init";
+    }
+    @PostMapping("/init")
+    public String addBook(@ModelAttribute AddressBook addressBook, Model model) {
+        addressBookRepo.save(addressBook);
+        model.addAttribute("addressBook", addressBook);
+        return "addressbookadded";
     }
 
     @GetMapping("/addBuddy")

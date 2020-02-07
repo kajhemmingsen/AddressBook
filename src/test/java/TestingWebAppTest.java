@@ -23,4 +23,9 @@ public class TestingWebAppTest {
     public void shouldReturnDefaultMessage() throws Exception {
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk());
     }
+
+    @Test
+    public void addABuddy() throws Exception {
+
+    }
 }
