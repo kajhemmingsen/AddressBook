@@ -1,4 +1,6 @@
 language: java
+jdk:
+- oraclejdk10
 deploy:
   provider: heroku
   api-key: a9f07d0e-811d-4991-a0ed-e4ffcd7f0f5c
