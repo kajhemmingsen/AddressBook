@@ -10,25 +10,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/")
+@CrossOrigin(origins = "http://localhost:8101")
 public class RegController {
 
-    long id =  1L;
+    long id;
     @Autowired
     private AddressBookRepo addressBookRepo;
     @Autowired
     private BuddyInfoRepo buddyInfoRepo;
 
     @GetMapping("/init")
-    public String landpage(Model model) {
+    public String landPage(Model model) {
         model.addAttribute("addressBook", new AddressBook());
         return "init";
     }
     @PostMapping("/init")
-    public String addBook(@ModelAttribute AddressBook addressBook, Model model) {
+    @ResponseBody
+    public AddressBook addBook(@ModelAttribute AddressBook addressBook, Model model) {
+        id = addressBook.getID();
         addressBookRepo.save(addressBook);
         model.addAttribute("addressBook", addressBook);
-        return "addressbookadded";
+        return addressBook;
     }
 
     @GetMapping("/addBuddy")
@@ -38,12 +40,13 @@ public class RegController {
     }
 
     @PostMapping("/addBuddy")
-    public String addbuddy(@ModelAttribute BuddyInfo buddyInfo, Model model) {
-        buddyInfoRepo.save(buddyInfo);
+    public String addBuddy(@ModelAttribute BuddyInfo buddyInfo, Model model) {
         AddressBook refBook = addressBookRepo.findById(id);
         refBook.addBuddy(buddyInfo);
-        model.addAttribute("ActiveBook", refBook);
+        model.addAttribute("addressBook", refBook);
+        buddyInfoRepo.save(buddyInfo);
         addressBookRepo.save(refBook);
+
         return "result";
     }
 }
